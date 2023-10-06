@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
-    private val alumnos = mutableListOf<Alumno>()
-    private val dbAlumno = DBHelperAlumno(this)
-    private val adapter = AlumnoAdapter(alumnos, dbAlumno)
-
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                Toast.makeText(this, "Alumno agregado correctamente", Toast.LENGTH_SHORT).show()
+                val data: Intent? = result.data
+                val mensaje = data?.getStringExtra("mensaje")
+                if(mensaje != null) {
+                    Toast.makeText(this, "$mensaje", Toast.LENGTH_SHORT)
+                        .show()
+                }
                 obtenerAlumnos()
             } else if (result.resultCode == Activity.RESULT_CANCELED){
                 val data: Intent? = result.data
@@ -30,6 +31,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    private val alumnos = mutableListOf<Alumno>()
+    private val dbAlumno = DBHelperAlumno(this)
+    private val adapter = AlumnoAdapter(alumnos, dbAlumno, resultLauncher)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
