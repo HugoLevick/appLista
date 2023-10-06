@@ -51,6 +51,19 @@
         android:layout_height="wrap_content"
         android:hint="Ingrese el correo electrónico"
         android:inputType="textEmailAddress" />
+    <TextView
+        android:id="@+id/txtImagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Imagen: (Opcional)"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/editTextImagen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese la imagen" />
 
     <Button
         android:id="@+id/btnAgregarAlumno"
